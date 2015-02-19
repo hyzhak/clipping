@@ -1,0 +1,25 @@
+{
+  "name": "clipping",
+  "version": "1.0.0",
+  "description": "word clipping",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyzhak/clipping.git"
+  },
+  "keywords": [
+    "clipping",
+    "twitter",
+    "minimizer",
+    "shortener"
+  ],
+  "author": "hyzhak (aka Eugene Krevenets)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyzhak/clipping/issues"
+  },
+  "homepage": "https://github.com/hyzhak/clipping"
+}
