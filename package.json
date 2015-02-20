@@ -4,7 +4,7 @@
   "description": "word clipping",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha test/*Spec.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,8 @@
   "homepage": "https://github.com/hyzhak/clipping",
   "devDependencies": {
     "browserify": "^8.1.3",
-    "gulp": "^3.8.11"
+    "chai": "^2.0.0",
+    "gulp": "^3.8.11",
+    "mocha": "^2.1.0"
   }
 }
