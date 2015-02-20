@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/hyzhak/clipping/issues"
   },
-  "homepage": "https://github.com/hyzhak/clipping"
+  "homepage": "https://github.com/hyzhak/clipping",
+  "devDependencies": {
+    "gulp": "^3.8.11"
+  }
 }
