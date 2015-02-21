@@ -6,7 +6,13 @@ describe('Clipper', function() {
         expect(clipper()).to.equal('');
     });
 
-    it('should "you" convert to "U"', function() {
-        expect(clipper('you')).to.equal('U');
+    describe('words', function() {
+        it('should "you" convert to "U"', function() {
+            expect(clipper('you')).to.equal('U');
+        });
+
+        it('should "github" convert to "gh"', function() {
+            expect(clipper('github')).to.equal('gh');
+        });
     });
 });
