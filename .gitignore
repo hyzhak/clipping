@@ -3,3 +3,6 @@ clipping.iml
 
 # Modules
 node_modules
+
+# build
+build
