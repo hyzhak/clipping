@@ -1,0 +1,25 @@
+{
+  "name": "clipping-gh-pages",
+  "version": "0.1.0",
+  "description": "demo of using clipping lib",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyzhak/clipping.git"
+  },
+  "keywords": [
+    "clipping",
+    "twitter",
+    "minimizer",
+    "shortener"
+  ],
+  "author": "Eugene Krevenets (aka hyzhak)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyzhak/clipping/issues"
+  },
+  "homepage": "https://github.com/hyzhak/clipping"
+}
