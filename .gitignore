@@ -3,3 +3,6 @@ gh-pages.iml
 
 # Modules
 node_modules
+
+# Tmp
+build/src/bundle.js
