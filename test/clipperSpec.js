@@ -11,8 +11,16 @@ describe('Clipper', function() {
             expect(clipper('you')).to.equal('U');
         });
 
+        it('shouldnt convert part of word', function() {
+            expect(clipper('youth')).to.equal('youth');
+        });
+
         it('should "github" convert to "gh"', function() {
             expect(clipper('github')).to.equal('gh');
+        });
+
+        it('should right merge back modified punctuations', function() {
+            expect(clipper('who are you?!')).to.equal('who are U?!')
         });
     });
 });

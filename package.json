@@ -16,7 +16,7 @@
     "minimizer",
     "shortener"
   ],
-  "author": "hyzhak (aka Eugene Krevenets)",
+  "author": "Eugene Krevenets (aka hyzhak)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hyzhak/clipping/issues"
@@ -33,5 +33,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.3.0"
+  },
+  "dependencies": {
+    "natural": "^0.2.0"
   }
 }
