@@ -5,4 +5,5 @@ clipping.iml
 node_modules
 
 # build
-build
+dist
+.dist-cache

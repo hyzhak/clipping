@@ -1,4 +1,9 @@
-var buffer = require('vinyl-buffer'),
+var argv = require('yargs')
+        .alias('m', 'message')
+        .describe('m', 'message for commit')
+        .argv,
+    buffer = require('vinyl-buffer'),
+    deploy = require('gulp-gh-pages'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     del = require('del'),
@@ -13,7 +18,11 @@ gulp.task('clean:build', function (cb) {
 });
 
 
-var bundler = watchify(browserify('./index.js', watchify.args));
+var bundler = watchify(
+    browserify('./index.js', watchify.args)
+        .ignore('lapack')
+        .ignore('WNdb')
+);
 
 gulp.task('browser-package', bundle); // so you can run `gulp browser-package` to build the file
 bundler.on('update', bundle); // on any dep update, runs the bundler
@@ -31,5 +40,16 @@ function bundle() {
         .pipe(gulp.dest('./build'));
 }
 
+gulp.task('deploy', function () {
+    return gulp.src('./dist/**/*')
+        .pipe(deploy({
+            cacheDir: '.dist-cache',
+            message: argv.m
+        }));
+});
 
+//TODO: test, jshint
 gulp.task('default', ['clean:build', 'browser-package']);
+
+//TODO: build and copy
+gulp.task('publish', ['deploy']);
