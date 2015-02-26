@@ -20,7 +20,7 @@ describe('Clipper', function() {
         });
 
         it('should right merge back modified punctuations', function() {
-            expect(clipper('who are you?!')).to.equal('who are U?!')
+            expect(clipper('who are you?!')).to.equal('who are U?!');
         });
     });
 });
