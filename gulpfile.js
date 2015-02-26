@@ -8,9 +8,11 @@ var argv = require('yargs')
     deploy = require('gulp-gh-pages'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
+    jshint = require('gulp-jshint'),
     mocha = require('gulp-mocha'),
     source = require('vinyl-source-stream'),
     sourcemaps = require('gulp-sourcemaps'),
+    stylish = require('jshint-stylish'),
     watchify = require('watchify');
 
 
@@ -46,6 +48,12 @@ gulp.task('test', function () {
         .pipe(mocha({reporter: 'nyan'}));
 });
 
+gulp.task('lint', function() {
+    return gulp.src(['./lib/**/*.js', './test/**/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish));
+});
+
 gulp.task('deploy', ['test'], function () {
     return gulp.src('./dist/**/*')
         .pipe(deploy({
@@ -55,7 +63,7 @@ gulp.task('deploy', ['test'], function () {
 });
 
 //TODO: jshint
-gulp.task('default', ['test', 'clean:build', 'browser-package']);
+gulp.task('default', ['test', 'lint', 'clean:build', 'browser-package']);
 
 //TODO: jshint, build and copy
 gulp.task('publish', ['test', 'deploy']);
