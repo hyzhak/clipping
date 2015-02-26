@@ -2,12 +2,13 @@ var argv = require('yargs')
         .alias('m', 'message')
         .describe('m', 'message for commit')
         .argv,
+    browserify = require('browserify'),
     buffer = require('vinyl-buffer'),
+    del = require('del'),
     deploy = require('gulp-gh-pages'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
-    del = require('del'),
-    browserify = require('browserify'),
+    mocha = require('gulp-mocha'),
     source = require('vinyl-source-stream'),
     sourcemaps = require('gulp-sourcemaps'),
     watchify = require('watchify');
@@ -40,7 +41,12 @@ function bundle() {
         .pipe(gulp.dest('./build'));
 }
 
-gulp.task('deploy', function () {
+gulp.task('test', function () {
+    return gulp.src('./test/**/*Spec.js', {read: false})
+        .pipe(mocha({reporter: 'nyan'}));
+});
+
+gulp.task('deploy', ['test'], function () {
     return gulp.src('./dist/**/*')
         .pipe(deploy({
             cacheDir: '.dist-cache',
@@ -48,8 +54,8 @@ gulp.task('deploy', function () {
         }));
 });
 
-//TODO: test, jshint
-gulp.task('default', ['clean:build', 'browser-package']);
+//TODO: jshint
+gulp.task('default', ['test', 'clean:build', 'browser-package']);
 
-//TODO: build and copy
-gulp.task('publish', ['deploy']);
+//TODO: jshint, build and copy
+gulp.task('publish', ['test', 'deploy']);
