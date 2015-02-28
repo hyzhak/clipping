@@ -19,28 +19,37 @@ gulp.task('clean:build', function (cb) {
     del(['./build'], cb)
 });
 
-
-var bundler = watchify(
-    browserify('./index.js', watchify.args)
+var build = browserify('./index.js', watchify.args)
         .ignore('lapack')
-        .ignore('WNdb')
-);
+        .ignore('WNdb');
 
-gulp.task('browser-package', bundle); // so you can run `gulp browser-package` to build the file
-bundler.on('update', bundle); // on any dep update, runs the bundler
-
-function bundle() {
-    return bundler.bundle()
-        // log errors if they happen
-        .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-        .pipe(source('bundle.js'))
-        // optional, remove if you dont want sourcemaps
-        .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
-        .pipe(sourcemaps.write('./')) // writes .map file
-        //
-        .pipe(gulp.dest('./build'));
+function buildBundle(bundler) {
+    return function() {
+        return bundler.bundle()
+            // log errors if they happen
+            .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+            .pipe(source('bundle.js'))
+            // optional, remove if you dont want sourcemaps
+            .pipe(buffer())
+            .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
+            .pipe(sourcemaps.write('./')) // writes .map file
+            //
+            .pipe(gulp.dest('./build'));
+    };
 }
+
+gulp.task('build-package', ['clean:build'], function() {
+    return buildBundle(build);
+});
+
+gulp.task('watchify-package', ['clean:build'], function() {
+    var bundler = watchify(build),
+        watchifyBundle = buildBundle(bundler);
+
+    bundler.on('update', watchifyBundle); // on any dep update, runs the bundler
+
+    return watchifyBundle();
+});
 
 gulp.task('test', function () {
     return gulp.src('./test/**/*Spec.js', {read: false})
@@ -53,4 +62,6 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('default', ['test', 'lint', 'clean:build', 'browser-package']);
+gulp.task('default', ['test', 'lint', 'clean:build', 'watchify-package']);
+
+gulp.task('build', ['test', 'lint', 'build-package']);
