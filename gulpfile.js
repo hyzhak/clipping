@@ -5,7 +5,6 @@ var argv = require('yargs')
     browserify = require('browserify'),
     buffer = require('vinyl-buffer'),
     del = require('del'),
-    deploy = require('gulp-gh-pages'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
@@ -54,15 +53,4 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('deploy', ['test'], function () {
-    return gulp.src('./example/build/**/*')
-        .pipe(deploy({
-            cacheDir: '.dist-cache',
-            message: argv.m
-        }));
-});
-
 gulp.task('default', ['test', 'lint', 'clean:build', 'browser-package']);
-
-//TODO: jshint, build and copy
-gulp.task('publish', ['test', 'deploy']);
