@@ -55,14 +55,13 @@ gulp.task('lint', function() {
 });
 
 gulp.task('deploy', ['test'], function () {
-    return gulp.src('./dist/**/*')
+    return gulp.src('./example/build/**/*')
         .pipe(deploy({
             cacheDir: '.dist-cache',
             message: argv.m
         }));
 });
 
-//TODO: jshint
 gulp.task('default', ['test', 'lint', 'clean:build', 'browser-package']);
 
 //TODO: jshint, build and copy

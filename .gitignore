@@ -1,5 +1,5 @@
 # IDE
-clipping.iml
+*.iml
 
 # Modules
 node_modules
