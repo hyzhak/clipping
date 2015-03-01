@@ -2,6 +2,7 @@ var argv = require('yargs')
         .alias('m', 'message')
         .describe('m', 'message for commit')
         .argv,
+    bump = require('gulp-bump'),
     browserify = require('browserify'),
     buffer = require('vinyl-buffer'),
     del = require('del'),
@@ -42,6 +43,12 @@ gulp.task('build-package', ['clean:build'], function() {
     return buildBundle(build);
 });
 
+gulp.task('bump', function(){
+    gulp.src('./package.json')
+        .pipe(bump())
+        .pipe(gulp.dest('./'));
+});
+
 gulp.task('watchify-package', ['clean:build'], function() {
     var bundler = watchify(build),
         watchifyBundle = buildBundle(bundler);
@@ -64,4 +71,4 @@ gulp.task('lint', function() {
 
 gulp.task('default', ['test', 'lint', 'clean:build', 'watchify-package']);
 
-gulp.task('build', ['test', 'lint', 'build-package']);
+gulp.task('build', ['bump', 'build-package', 'lint', 'test']);
