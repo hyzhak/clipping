@@ -4,6 +4,7 @@ var argv = require('yargs')
         .describe('m', 'message for commit')
         .argv,
     buffer = require('vinyl-buffer'),
+    bump = require('gulp-bump'),
     browserify = require('browserify'),
     del = require('del'),
     deploy = require('gulp-gh-pages'),
@@ -43,6 +44,12 @@ gulp.task('js', ['clean'], function() {
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(gulp.dest(paths.dest +'/src/'));
+});
+
+gulp.task('bump', function(){
+    gulp.src('./package.json')
+        .pipe(bump())
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('compress-js', ['clean'], function() {
@@ -85,4 +92,4 @@ gulp.task('watch', function() {
 gulp.task('default', ['watch', 'css', 'js', 'copy-index']);
 
 // Prepare and Push repo to GitHub pages
-gulp.task('publish', ['deploy']);
+gulp.task('publish', ['bump', 'deploy']);
