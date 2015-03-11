@@ -10,6 +10,7 @@ var argv = require('yargs')
     deploy = require('gulp-gh-pages'),
     gulp = require('gulp'),
     less = require('gulp-less'),
+    livereload = require('gulp-livereload'),
     reactify = require('reactify'),
     rename = require('gulp-rename'),
     source = require('vinyl-source-stream'),
@@ -20,30 +21,37 @@ var argv = require('yargs')
 var paths = {
     css: ['src/css/**/*.less'],
     app: ['./src/js/app.jsx'],
-    js: ['src/js/*.js'],
+    js: ['src/js/*.js', 'src/js/*.jsx'],
+    index: ['index.html'],
 
     dest: './build'
 };
 
-gulp.task('clean', function(done) {
-    del(['build'], done);
+gulp.task('clear-css', function(done) {
+    del(['build/css'], done);
+});
+
+gulp.task('clear-js', function(done) {
+    del(['build/js'], done);
 });
 
 // It finds all our Stylus files and compiles them.
-gulp.task('css', ['clean'], function() {
+gulp.task('css', ['clear-css'], function() {
     return gulp.src(paths.css)
         .pipe(less())
-        .pipe(gulp.dest(paths.dest +'/css'));
+        .pipe(gulp.dest(paths.dest +'/css'))
+        .pipe(livereload());
 });
 
 // It will Browserify our code and compile React JSX files.
-gulp.task('js', ['clean'], function() {
+gulp.task('js', ['clear-js'], function() {
     // Browserify/bundle the JS.
     browserify(paths.app)
         .transform(reactify)
         .bundle()
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest(paths.dest +'/src/'));
+        .pipe(gulp.dest(paths.dest +'/src/'))
+        .pipe(livereload());
 });
 
 gulp.task('bump', function(){
@@ -52,7 +60,7 @@ gulp.task('bump', function(){
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('compress-js', ['clean'], function() {
+gulp.task('compress-js', function() {
     return browserify(paths.app)
         .transform(reactify)
         .bundle()
@@ -62,12 +70,13 @@ gulp.task('compress-js', ['clean'], function() {
         .pipe(gulp.dest(paths.dest + '/src/'))
 });
 
-gulp.task('copy-index', ['clean'], function() {
+gulp.task('copy-index', function() {
     gulp.src('./index.html')
-        .pipe(gulp.dest(paths.dest));
+        .pipe(gulp.dest(paths.dest))
+        .pipe(livereload({start: true}));
 });
 
-gulp.task('copy-readme', ['clean'], function() {
+gulp.task('copy-readme', function() {
     gulp.src('./README.md')
         .pipe(gulp.dest(paths.dest));
 });
@@ -84,8 +93,10 @@ gulp.task('deploy', ['css', 'compress-js', 'copy-index', 'copy-readme'], functio
 
 // Rerun tasks whenever a file changes.
 gulp.task('watch', function() {
+    livereload.listen();
     gulp.watch(paths.css, ['css']);
     gulp.watch(paths.js, ['js']);
+    gulp.watch(paths.index, ['copy-index']);
 });
 
 // The default task (called when we run `gulp` from cli)
