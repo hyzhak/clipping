@@ -2,7 +2,7 @@ var React = require('react');
 
 var InputMessage = React.createClass({
     onChange: function(event) {
-        this.value = (event.currentTarget.value);
+        this.props.onUpdate(event.currentTarget.value);
     },
     render: function() {
         return (
@@ -14,7 +14,6 @@ var InputMessage = React.createClass({
                     onChange={this.onChange}
                     placeholder="Type your message"
                     value={this.props.value}/>
-                <span>{this.value}</span>
             </div>
         );
     }
@@ -38,16 +37,19 @@ var OutputMessage = React.createClass({
 
 var Compressor = React.createClass({
     getInitialState: function() {
-        return {text: ''};
+        return {org: '', compressed: ''};
     },
-    componentDidMount: function() {
-
+    handleUpdateMessage: function(value) {
+        this.setState({
+            org: value,
+            compressed: value
+        });
     },
     render: function() {
         return (
             <form>
-                <InputMessage value={this.state.text}/>
-                <OutputMessage value={this.state.text}/>
+                <InputMessage value={this.state.org} onUpdate={this.handleUpdateMessage}/>
+                <OutputMessage value={this.state.compressed}/>
             </form>
         );
     }
