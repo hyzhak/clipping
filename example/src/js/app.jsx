@@ -35,6 +35,16 @@ var OutputMessage = React.createClass({
     }
 });
 
+var MessageState = React.createClass({
+    render: function() {
+        return (
+            <div>
+                size: {this.props.value.length}
+            </div>
+        )
+    }
+});
+
 var Compressor = React.createClass({
     getInitialState: function() {
         return {org: '', compressed: ''};
@@ -49,7 +59,9 @@ var Compressor = React.createClass({
         return (
             <form>
                 <InputMessage value={this.state.org} onUpdate={this.handleUpdateMessage}/>
+                <MessageState value={this.state.org}/>
                 <OutputMessage value={this.state.compressed}/>
+                <MessageState value={this.state.compressed}/>
             </form>
         );
     }
