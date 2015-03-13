@@ -52,7 +52,7 @@ var Compressor = React.createClass({
     handleUpdateMessage: function(value) {
         this.setState({
             org: value,
-            compressed: value
+            compressed: value.trim()
         });
     },
     render: function() {
