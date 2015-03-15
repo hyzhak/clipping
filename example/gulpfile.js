@@ -64,6 +64,8 @@ gulp.task('bump', function(){
 
 gulp.task('compress-js', function() {
     return browserify(paths.app)
+        .ignore('lapack')
+        .ignore('WNdb')
         .transform(reactify)
         .bundle()
         .pipe(source('bundle.js')) // gives streaming vinyl file object
