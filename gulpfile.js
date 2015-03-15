@@ -1,8 +1,4 @@
-var argv = require('yargs')
-        .alias('m', 'message')
-        .describe('m', 'message for commit')
-        .argv,
-    bump = require('gulp-bump'),
+var bump = require('gulp-bump'),
     browserify = require('browserify'),
     buffer = require('vinyl-buffer'),
     del = require('del'),
@@ -40,7 +36,7 @@ function buildBundle(bundler) {
 }
 
 gulp.task('build-package', ['clean:build'], function() {
-    return buildBundle(build);
+    return buildBundle(build)();
 });
 
 gulp.task('bump', function(){
