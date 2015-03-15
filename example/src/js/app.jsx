@@ -1,8 +1,5 @@
 var React = require('react'),
-    InputMessage = require('./inputMessage.jsx'),
-    OutputMessage = require('./outputMessage.jsx'),
-    MessageState = require('./messageState.jsx'),
-    Compressor = require('./comporessor.jsx');
+    Compressor = require('./compressor.jsx');
 
 React.render(
     <div>

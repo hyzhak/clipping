@@ -1,13 +1,18 @@
-var React = require('react');
+var React = require('react'),
+    InputMessage = require('./inputMessage.jsx'),
+    OutputMessage = require('./outputMessage.jsx'),
+    MessageState = require('./messageState.jsx');
 
 module.exports = React.createClass({
     getInitialState: function() {
         return {org: '', compressed: ''};
     },
     handleUpdateMessage: function(value) {
+        var comporessed = value.trim();
+
         this.setState({
             org: value,
-            compressed: value.trim()
+            compressed: comporessed
         });
     },
     render: function() {
