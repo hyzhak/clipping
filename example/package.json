@@ -24,6 +24,7 @@
   "homepage": "https://github.com/hyzhak/clipping",
   "dependencies": {
     "browserify": "^9.0.3",
+    "clipping": "^0.1.1",
     "gulp": "^3.8.11",
     "q": "^1.2.0",
     "react": "^0.12.2"
