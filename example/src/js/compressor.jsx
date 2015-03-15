@@ -1,4 +1,5 @@
-var React = require('react'),
+var clipping = require('clipping'),
+    React = require('react'),
     InputMessage = require('./inputMessage.jsx'),
     OutputMessage = require('./outputMessage.jsx'),
     MessageState = require('./messageState.jsx');
@@ -8,11 +9,11 @@ module.exports = React.createClass({
         return {org: '', compressed: ''};
     },
     handleUpdateMessage: function(value) {
-        var comporessed = value.trim();
+        var compressed = clipping(value.trim());
 
         this.setState({
             org: value,
-            compressed: comporessed
+            compressed: compressed
         });
     },
     render: function() {

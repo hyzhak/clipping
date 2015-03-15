@@ -47,6 +47,8 @@ gulp.task('css', ['clear-css'], function() {
 gulp.task('js', ['clear-js'], function() {
     // Browserify/bundle the JS.
     browserify(paths.app)
+        .ignore('lapack')
+        .ignore('WNdb')
         .transform(reactify)
         .bundle()
         .pipe(source('bundle.js'))
