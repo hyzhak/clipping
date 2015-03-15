@@ -1,6 +1,6 @@
 {
   "name": "clipping",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "word clipping",
   "main": "index.js",
   "scripts": {

@@ -22,5 +22,9 @@ describe('Clipper', function() {
         it('should right merge back modified punctuations', function() {
             expect(clipper('who are you?!')).to.equal('who are U?!');
         });
+
+        it('should not add extra space after comma', function() {
+            expect(clipper('apple, tomato')).to.equal('apple, tomato');
+        });
     });
 });
