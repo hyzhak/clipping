@@ -1,5 +1,4 @@
 var argv = require('yargs')
-        .demand('m')
         .alias('m', 'message')
         .describe('m', 'message for commit')
         .argv,
@@ -40,7 +39,7 @@ gulp.task('css', ['clear-css'], function() {
     return gulp.src(paths.css)
         .pipe(less())
         .pipe(gulp.dest(paths.dest +'/css'))
-        .pipe(livereload());
+        .pipe(livereload({start: true}));
 });
 
 // It will Browserify our code and compile React JSX files.
@@ -53,13 +52,20 @@ gulp.task('js', ['clear-js'], function() {
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(gulp.dest(paths.dest +'/src/'))
-        .pipe(livereload());
+        .pipe(livereload({start: true}));
 });
 
 gulp.task('bump', function(){
     gulp.src('./package.json')
         .pipe(bump())
         .pipe(gulp.dest('./'));
+});
+
+// It finds all our Stylus files and compiles them.
+gulp.task('comporess-css', ['clear-css'], function() {
+    return gulp.src(paths.css)
+        .pipe(less())
+        .pipe(gulp.dest(paths.dest +'/css'));
 });
 
 gulp.task('compress-js', function() {
@@ -76,6 +82,11 @@ gulp.task('compress-js', function() {
 
 gulp.task('copy-index', function() {
     gulp.src('./index.html')
+        .pipe(gulp.dest(paths.dest));
+});
+
+gulp.task('copy-index-n-watch', function() {
+    gulp.src('./index.html')
         .pipe(gulp.dest(paths.dest))
         .pipe(livereload({start: true}));
 });
@@ -85,7 +96,11 @@ gulp.task('copy-readme', function() {
         .pipe(gulp.dest(paths.dest));
 });
 
-gulp.task('deploy', ['css', 'compress-js', 'copy-index', 'copy-readme'], function () {
+gulp.task('deploy', ['comporess-css', 'compress-js', 'copy-index', 'copy-readme'], function () {
+    if (!argv.m) {
+        throw new Error('There should be parameter -m "<message>"');
+    }
+
     return gulp.src(paths.dest + '/**/*')
         .pipe(deploy({
             //lib tries to find .git folder in root and can't so we should define all params manual
@@ -97,14 +112,14 @@ gulp.task('deploy', ['css', 'compress-js', 'copy-index', 'copy-readme'], functio
 
 // Rerun tasks whenever a file changes.
 gulp.task('watch', function() {
-    livereload.listen();
+    livereload.listen({start: true});
     gulp.watch(paths.css, ['css']);
     gulp.watch(paths.js, ['js']);
     gulp.watch(paths.index, ['copy-index']);
 });
 
 // The default task (called when we run `gulp` from cli)
-gulp.task('default', ['watch', 'css', 'js', 'copy-index']);
+gulp.task('default', ['watch', 'css', 'js', 'copy-index-n-watch']);
 
 // Prepare and Push repo to GitHub pages
 gulp.task('publish', ['bump', 'deploy']);
