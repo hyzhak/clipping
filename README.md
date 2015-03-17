@@ -1,4 +1,4 @@
-# clipping [![npm version](https://badge.fury.io/js/clipping.svg)](http://badge.fury.io/js/clipping)
+# clipping [![npm version](https://badge.fury.io/js/clipping.svg)](http://badge.fury.io/js/clipping) [![Build Status](https://travis-ci.org/hyzhak/clipping.svg)](https://travis-ci.org/hyzhak/clipping)
 
 clipping words - is a text shortening service. Do it before twitting!
 
