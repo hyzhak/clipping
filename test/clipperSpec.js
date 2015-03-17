@@ -18,13 +18,21 @@ describe('Clipper', function() {
         it('should "github" convert to "gh"', function() {
             expect(clipper('github')).to.equal('gh');
         });
+    });
 
-        it('should right merge back modified punctuations', function() {
-            expect(clipper('who are you?!')).to.equal('who are U?!');
-        });
+    it('should right merge back modified punctuations', function() {
+        expect(clipper('who are you?!')).to.equal('who are U?!');
+    });
 
-        it('should not add extra space after comma', function() {
-            expect(clipper('apple, tomato')).to.equal('apple, tomato');
-        });
+    it('should not add extra space after comma', function() {
+        expect(clipper('apple, tomato')).to.equal('apple, tomato');
+    });
+
+    it('should preserve _', function() {
+        expect(clipper('word _ word')).to.equal('word _ word');
+    });
+
+    it('should preserve __', function() {
+        expect(clipper('word __ word')).to.equal('word __ word');
     });
 });
