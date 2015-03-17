@@ -2,7 +2,7 @@ var React = require('react'),
     Compressor = require('./compressor.jsx');
 
 React.render(
-    <div>
+    <div className="container">
         <Compressor/>
     </div>,
     document.getElementById('root')
