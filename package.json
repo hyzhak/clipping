@@ -1,6 +1,6 @@
 {
   "name": "clipping",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "word clipping",
   "main": "index.js",
   "scripts": {
@@ -41,6 +41,7 @@
     "gulp-util": "^3.0.3",
     "jshint-stylish": "^1.0.1",
     "mocha": "^2.1.0",
+    "run-sequence": "^1.0.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.3.0",

@@ -6,6 +6,7 @@ var bump = require('gulp-bump'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
     mocha = require('gulp-mocha'),
+    sequence = require('run-sequence'),
     source = require('vinyl-source-stream'),
     sourcemaps = require('gulp-sourcemaps'),
     stylish = require('jshint-stylish'),
@@ -40,7 +41,7 @@ gulp.task('build-package', ['clean:build'], function() {
 });
 
 gulp.task('bump', function(){
-    gulp.src('./package.json')
+    return gulp.src('./package.json')
         .pipe(bump())
         .pipe(gulp.dest('./'));
 });
@@ -65,6 +66,21 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('default', ['test', 'lint', 'clean:build', 'watchify-package']);
+// --------------------------
+// meta tasks
+// --------------------------
 
-gulp.task('build', ['bump', 'build-package', 'lint', 'test']);
+gulp.task('default', function() {
+    return sequence(
+        'clean:build',
+        ['test', 'lint', 'watchify-package']
+    );
+});
+
+gulp.task('build', function() {
+    return sequence(
+        'build-package',
+        ['lint', 'test'],
+        'bump'
+    );
+});
