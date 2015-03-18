@@ -29,6 +29,10 @@ $ gulp build
 *In linguistics, clipping is the word formation process which consists in the reduction of a word to one of its parts (Marchand: 1969).*
 [Clipping (morphology) at Wikipedia](http://en.wikipedia.org/wiki/Clipping_%28morphology%29)
 
+## analogs
+
+* http://txtn.us/text-reduction - replase group of symbols with single. Like `This little tool will reduce text` => `This littᇉ tᅇl wiᄔ reduŒ text `
+
 ## publications
 
 * Contextual Bearing on Linguistic Variation in Social Media by [Stephan Gouws](https://twitter.com/sgouws) [pdf](http://don-metzler.net/presentations/gouws-lsm11.pdf)
