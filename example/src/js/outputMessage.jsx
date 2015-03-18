@@ -1,9 +1,8 @@
 var React = require('react');
 
 module.exports = React.createClass({
-    render: function() {
-        return (
-            <div className="form-group">
+    render(): any {
+        return <div className="form-group">
                 <label for="outputMessage">Output:</label>
                 <input type="text"
                     className="form-control"
@@ -11,7 +10,6 @@ module.exports = React.createClass({
                     placeholder="Type your message"
                     readOnly="true"
                     value={this.props.value}/>
-            </div>
-        );
+        </div>;
     }
 });

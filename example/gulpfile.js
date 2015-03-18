@@ -2,6 +2,7 @@ var argv = require('yargs')
         .alias('m', 'message')
         .describe('m', 'message for commit')
         .argv,
+    babelify = require('babelify'),
     buffer = require('vinyl-buffer'),
     bump = require('gulp-bump'),
     browserify = require('browserify'),
@@ -48,6 +49,7 @@ gulp.task('js', ['clear-js'], function() {
     browserify(paths.app)
         .ignore('lapack')
         .ignore('WNdb')
+        .transform(babelify)
         .transform(reactify)
         .bundle()
         .pipe(source('bundle.js'))

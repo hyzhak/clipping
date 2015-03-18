@@ -30,7 +30,9 @@
     "react": "^0.12.2"
   },
   "devDependencies": {
+    "babelify": "^5.0.4",
     "del": "^1.1.1",
+    "gulp-babel": "^4.0.0",
     "gulp-bump": "^0.2.2",
     "gulp-gh-pages": "^0.4.0",
     "gulp-less": "^3.0.1",
