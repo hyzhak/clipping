@@ -35,4 +35,22 @@ describe('Clipper', function() {
     it('should preserve __', function() {
         expect(clipper('word __ word')).to.equal('word __ word');
     });
+
+    describe('readability', function() {
+        it('should use as short as possible version without restrictions on readability', function() {
+            expect(clipper('love')).to.equal('♥');
+        });
+
+        it('should use as short as possible version if available readability is zero', function() {
+            expect(clipper('love', 0)).to.equal('♥');
+        });
+
+        it('should use longer version if available readability is .3', function() {
+            expect(clipper('love', 0.3)).to.equal('luv');
+        });
+
+        it('should keep original version if available readability is more than half', function() {
+            expect(clipper('love', 0.5)).to.equal('love');
+        });
+    });
 });
