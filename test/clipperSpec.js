@@ -18,6 +18,10 @@ describe('Clipper', function() {
         it('should "github" convert to "gh"', function() {
             expect(clipper('github')).to.equal('gh');
         });
+
+        it('should "For" convert to "4"', function() {
+            expect(clipper('For')).to.equal('4');
+        });
     });
 
     it('should right merge back modified punctuations', function() {
