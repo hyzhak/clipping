@@ -21,6 +21,7 @@ module.exports = React.createClass({
             <form>
                 <InputMessage value={this.state.org} onUpdate={this.handleUpdateMessage}/>
                 <MessageState value={this.state.org}/>
+                <label for="outputMessage">Output: &nbsp;</label>
                 <OutputMessage value={this.state.compressed}/>
                 <MessageState value={this.state.compressed}/>
             </form>

@@ -27,7 +27,9 @@
     "clipping": "^0.1.1",
     "gulp": "^3.8.11",
     "q": "^1.2.0",
-    "react": "^0.12.2"
+    "react": "^0.12.2",
+    "react-zeroclipboard": "^0.4.1",
+    "zeroclipboard": "^2.2.0"
   },
   "devDependencies": {
     "babelify": "^5.0.4",
