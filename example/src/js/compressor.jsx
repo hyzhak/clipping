@@ -6,7 +6,8 @@ var clipping = require('clipping'),
 
 module.exports = React.createClass({
     getInitialState: function() {
-        return {org: '', compressed: ''};
+        var message = 'hello world!';
+        return {org: message, compressed: clipping(message.trim())};
     },
     handleUpdateMessage: function(value) {
         var compressed = clipping(value.trim());
