@@ -1,6 +1,6 @@
 {
   "name": "clipping-gh-pages",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "demo of using clipping lib",
   "main": "index.js",
   "scripts": {
