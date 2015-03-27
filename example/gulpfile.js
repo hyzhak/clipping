@@ -64,7 +64,7 @@ gulp.task('bump', function(){
 });
 
 // It finds all our Stylus files and compiles them.
-gulp.task('comporess-css', ['clear-css'], function() {
+gulp.task('compress-css', ['clear-css'], function() {
     return gulp.src(paths.css)
         .pipe(less())
         .pipe(gulp.dest(paths.dest +'/css'));
@@ -74,6 +74,7 @@ gulp.task('compress-js', function() {
     return browserify(paths.app)
         .ignore('lapack')
         .ignore('WNdb')
+        .transform(babelify)
         .transform(reactify)
         .bundle()
         .pipe(source('bundle.js')) // gives streaming vinyl file object
@@ -98,7 +99,7 @@ gulp.task('copy-readme', function() {
         .pipe(gulp.dest(paths.dest));
 });
 
-gulp.task('deploy', ['comporess-css', 'compress-js', 'copy-index', 'copy-readme'], function () {
+gulp.task('deploy', ['compress-css', 'compress-js', 'copy-index', 'copy-readme'], function () {
     if (!argv.m) {
         throw new Error('There should be parameter -m "<message>"');
     }
