@@ -24,6 +24,13 @@ $ npm install clipping --save
 $ gulp build
 ```
 
+# roadmap
+
+* support multi word clipping (```As soon as possible -> asap```);
+* synonyms (```hello -> hi```);
+* numbers (```first -> 1st```);
+* adaptive cliping. Clip only if we need and with right rate to fit to requirements;
+
 # theory
 
 *In linguistics, clipping is the word formation process which consists in the reduction of a word to one of its parts (Marchand: 1969).*
