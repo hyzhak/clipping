@@ -18,6 +18,9 @@ $ npm install clipping --save
 
 ```
 
+# example
+[readme](https://github.com/hyzhak/clipping/blob/master/example/README.md)
+
 # build
 
 ``` shell
